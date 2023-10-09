@@ -1,24 +1,24 @@
-name: GitHub Actions Build and Deploy Demo   # 这个构建的名字，会出现在github action的actions选项中
-on:                                          # 监听"哪个分支" 的 "那个动作" 这里的意思是监听master分支的push动作
+name: GitHub Actions Build and Deploy Demo        # 大标题
+on:
   push:
     branches:
-      - master
-jobs:                                        # 表示执行的一项或者多项任务
-  build-and-deploy:                          # job的id
-    runs-on: ubuntu-latest                   # 指所需的运行环境
-    steps:                                   # job的运行步骤
-      - name: Checkout                       # 步骤名称
-        uses: actions/checkout@v2            # 使用那个action
-        with:                                # 定义环境变量 
-          persist-credentials: false         # 设置这个是听取GitHub上一个例子的建议，删掉也没事  
-      - name: Install and Build
-        run: |                               # 步骤运行的命令
+      - master                                   # 监听哪个分支的哪个动作
+permissions:
+  contents: write                                # 设置权限，可写，也可以不用配置，v4版本新增的
+jobs:
+  build-and-deploy:                              # 其中一个任务的名称，ID
+    runs-on: ubuntu-latest                       # 这个任务运行所需的环境
+    steps:
+      - name: Checkout                 # 第一步：获取源码
+        uses: actions/checkout@v3                # 使用的工具
+
+      - name: Install and Build 🔧               # 第二步：下载依赖和构建
+        run: |
           yarn install
           yarn build
-      - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@releases/v3
+
+      - name: Deploy                # 第三步：部署
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }} # Github的token 阮一峰老师的博客里面有介绍过
-          SSH_KEY: true
-          BRANCH: gh-pages                          # 部署到那个分支
-          FOLDER: dist                              # 要进行部署的目录
+          folder: dist                         # 部署的目录
+          branch: gh-pages                     # 部署到哪个分支
