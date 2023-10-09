@@ -19,5 +19,6 @@ jobs:                                        # 表示执行的一项或者多项
         uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
           GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }} # Github的token 阮一峰老师的博客里面有介绍过
+          SSH_KEY: true
           BRANCH: gh-pages                          # 部署到那个分支
           FOLDER: dist                              # 要进行部署的目录
