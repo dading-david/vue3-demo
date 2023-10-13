@@ -10,7 +10,7 @@ export default defineConfig({
     vue(),
     vueJsx(),
   ],
-  base: '/vue3-demo/',  // 这个路径是我仓库的名字
+  // base: '/vue3-demo/',  // 这个路径是我仓库的名字
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
