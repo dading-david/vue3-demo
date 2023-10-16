@@ -29,11 +29,10 @@ jobs:
           docker tag vue3-demo:latest dadingdd/vue3-demo:latest
           docker push dadingdd/vue3-demo:latest
       
-        - name: SSH Remote Commands
+      - name: SSH Remote Commands
         uses: appleboy/ssh-action@v1.0.0
         with:
           host: ${{ secrets.TENCENT_CLOUD_IP }}
           username: ${{ secrets.TENCENT_CLOUD_USERNAME }}
           password: ${{ secrets.TENCENT_CLOUD_PASSWORD }}
         script: cd ~ && sh deploy.sh ${{ secrets.DOCKER_USERNAME }} ${{ secrets.DOCKER_PASSWORD }} # 在服务器上运行拉取docker镜像、启动docker容器脚本
-
