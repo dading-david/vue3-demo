@@ -25,7 +25,7 @@ jobs:
       
       - name: Build and push the Docker Hub # 打包镜像并push到Docker Hub
         run: |
-          docker build -t vue3-demo:latest --platform=linux/arm64
+          docker build . -t vue3-demo:latest --platform=linux/arm64
           docker tag vue3-demo:latest dadingdd/vue3-demo:latest
           docker push dadingdd/vue3-demo:latest
       
